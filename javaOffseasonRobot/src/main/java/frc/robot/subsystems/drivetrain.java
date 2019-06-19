@@ -7,8 +7,9 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 
 import com.revrobotics.CANError;
@@ -29,6 +30,7 @@ public class drivetrain extends Subsystem {
   private CANSparkMax rightMidMotor;
   private CANSparkMax rightFrontMotor;
 
+  public DifferentialDrive differentialDrive = null;
 
   public void robotinit() {
     //Initialize Left motors
@@ -40,16 +42,40 @@ public class drivetrain extends Subsystem {
     rightMidMotor = new CANSparkMax(RobotMap.rightMidSpark, MotorType.kBrushless);
     rightFrontMotor = new CANSparkMax(RobotMap.rightFrontSpark, MotorType.kBrushless);
 
-    //Set idleMode
-    //Left
-    leftBackMotor.setIdleMode(IdleMode.kBrake);
-    leftMidMotor.setIdleMode(IdleMode.kBrake);
-    leftFrontMotor.setIdleMode(IdleMode.kBrake);
-    //Right
-    rightBackMotor.setIdleMode(IdleMode.kBrake);
-    rightMidMotor.setIdleMode(IdleMode.kBrake);
-    rightFrontMotor.setIdleMode(IdleMode.kBrake);
+    setIdleMode(true);
 
+    SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftBackMotor, leftMidMotor, leftFrontMotor);
+    SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightBackMotor, rightMidMotor, rightFrontMotor);
+    differentialDrive = new DifferentialDrive(leftMotors, rightMotors);
+
+  }
+
+  public void tankdrive(double leftSpeed, double rightSpeed, boolean squareInputs) {
+    differentialDrive.tankDrive(leftSpeed, rightSpeed, squareInputs);
+  }
+
+  public void setIdleMode(Boolean brakemode) {
+    if (brakemode == true) {
+      //Set BrakeMode
+      //Left
+      leftBackMotor.setIdleMode(IdleMode.kBrake);
+      leftMidMotor.setIdleMode(IdleMode.kBrake);
+      leftFrontMotor.setIdleMode(IdleMode.kBrake);
+      //Right
+      rightBackMotor.setIdleMode(IdleMode.kBrake);
+      rightMidMotor.setIdleMode(IdleMode.kBrake);
+      rightFrontMotor.setIdleMode(IdleMode.kBrake);
+    } else {
+      //Set BrakeMode
+      //Left
+      leftBackMotor.setIdleMode(IdleMode.kBrake);
+      leftMidMotor.setIdleMode(IdleMode.kBrake);
+      leftFrontMotor.setIdleMode(IdleMode.kBrake);
+      //Right
+      rightBackMotor.setIdleMode(IdleMode.kBrake);
+      rightMidMotor.setIdleMode(IdleMode.kBrake);
+      rightFrontMotor.setIdleMode(IdleMode.kBrake);
+    }
   }
 
   @Override

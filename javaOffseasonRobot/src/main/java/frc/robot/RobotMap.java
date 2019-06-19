@@ -31,6 +31,11 @@ public class RobotMap {
 
   public static double wheelDiameter = 0.0103;
 
+  public static int leftAxis = 1;
+  public static int rightAxis = 5;
+
+  public static int boostButton = 5;
+
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:

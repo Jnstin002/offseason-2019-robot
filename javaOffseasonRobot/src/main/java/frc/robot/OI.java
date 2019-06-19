@@ -15,12 +15,11 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 
-
   //Initialize driver joystick
-  Joystick driverJoystick = new Joystick(RobotMap.driverJoystick);
+  public Joystick driverJoystick = new Joystick(RobotMap.driverJoystick);
 
   //Initialize operator joystick
-  Joystick operatorJoystick = new Joystick(RobotMap.operatorJoystick);
+  public Joystick operatorJoystick = new Joystick(RobotMap.operatorJoystick);
   // Button button = new JoystickButton(stick, buttonNumber);
 
   // There are a few additional built in buttons you can use. Additionally,
